@@ -1,13 +1,13 @@
 'use client';
-import axios from "@/lib/axios"
+import axios from "../lib/axios"
 import { useRouter } from 'next/navigation'
 
 export default function Todo(p) {
 
     const router = useRouter()
 
-    function deleteHandler() {
-        axios.delete('/todos/' + p.slug)
+    async function deleteHandler() {
+        await axios.delete(process.env.NEXT_PUBLIC_API_URL + '/todos/' + p.slug)
         router.refresh()
     }
 

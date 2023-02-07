@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default axios.create({
-    baseURL: 'http://localhost:8000/api',
+    baseURL: 'https://nahian-api.000webhostapp.com/api/todos',
     headers: {
         'X-Requested-With': 'XMLHttpRequest',
     },

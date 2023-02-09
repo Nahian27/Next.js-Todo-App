@@ -1,9 +1,9 @@
-import axios from 'axios'
+import Axios from 'axios'
 
-export default axios.create({
+export default Axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
     headers: {
         'X-Requested-With': 'XMLHttpRequest',
     },
-    withCredentials: true
+    withCredentials: false
 })

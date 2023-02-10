@@ -9,10 +9,12 @@ export default function Todo(p: { slug: number, title: string, text: string }) {
 
     async function deleteHandler() {
 
-        const { error } = await supabase
+
+        const { data, error } = await supabase
             .from('Todos')
             .delete()
             .eq('id', p.slug)
+
 
 
         router.refresh()
@@ -23,7 +25,7 @@ export default function Todo(p: { slug: number, title: string, text: string }) {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
+            transition={{ duration: 0.5 }}
             className='card shadow-sm p-0 m-2 m-lg-3' style={{ width: '300px', height: '350px' }}>
             <h2 className='card-header'>
                 {p.title}

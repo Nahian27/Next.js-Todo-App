@@ -1,6 +1,6 @@
 'use client';
 import { motion, AnimatePresence } from "framer-motion"
-import axios from "../lib/axios"
+import { supabase } from "../lib/initSupabase"
 import { useRouter } from 'next/navigation'
 
 export default function Todo(p: { slug: number, title: string, text: string }) {
@@ -8,7 +8,13 @@ export default function Todo(p: { slug: number, title: string, text: string }) {
     const router = useRouter()
 
     async function deleteHandler() {
-        await axios.delete(process.env.NEXT_PUBLIC_API_URL + '/todos/' + p.slug)
+
+        const { error } = await supabase
+            .from('Todos')
+            .delete()
+            .eq('id', p.slug)
+
+
         router.refresh()
     }
 

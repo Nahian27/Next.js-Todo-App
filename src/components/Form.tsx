@@ -1,21 +1,26 @@
 'use client';
-import axios from "../lib/axios"
-import { useRef } from "react";
+import React, { useRef, ChangeEvent, FormEvent } from "react";
 import { useRouter } from 'next/navigation'
+import { supabase } from "@/lib/initSupabase";
 
 function Form() {
 
-    const titleRef = useRef()
-    const descRef = useRef()
+    const titleRef = useRef<HTMLInputElement>(null)
+    const descRef = useRef<HTMLInputElement>(null)
     const router = useRouter()
 
-    async function handelSubmit(e) {
+    async function handelSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
         const data = {
-            title: titleRef.current.value,
-            content: descRef.current.value
+            title: titleRef.current?.value,
+            content: descRef.current?.value
         }
-        await axios.post(process.env.NEXT_PUBLIC_API_URL + '/todos', data)
+
+        const { error } = await supabase
+            .from('Todos')
+            .insert(data)
+
+
         router.refresh()
     }
 

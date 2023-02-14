@@ -1,12 +1,10 @@
 import { supabase } from '../lib/initSupabase'
 import Form from "../components/Form";
 import Todo from "../components/Todo";
-export const revalidate = 0;
+
 export default async function App() {
 
-
   const { data, error } = await supabase.from('Todos').select('*')
-
 
   return (<>
     <h1 className='p-5 text-center'>Welcome To My Todo App</h1>

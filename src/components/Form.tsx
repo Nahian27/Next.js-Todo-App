@@ -12,16 +12,13 @@ function Form() {
     async function handelSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
         const todo = {
-            title: titleRef.current?.value,
-            content: descRef.current?.value
+            title: titleRef.current!.value,
+            content: descRef.current!.value
         }
 
-
-        const { data, error } = await supabase
+        const { error } = await supabase
             .from('Todos')
             .insert(todo)
-
-
 
         router.refresh()
     }

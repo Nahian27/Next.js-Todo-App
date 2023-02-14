@@ -16,7 +16,7 @@ function EditFrom(p: { id: number, title: string, content: string }) {
             .from('Todos')
             .update({ title: title, content: content })
             .eq('id', p.id)
-        router.push('/')
+        router.replace('/')
     }
 
     return (<><div className="container">
@@ -26,6 +26,7 @@ function EditFrom(p: { id: number, title: string, content: string }) {
             <input name="content" placeholder='Todo Text' className='col-2 col-lg form-control m-2' value={content} onChange={(e) => setContent(e.target.value)} required />
             <Link
                 href={'/'}
+                prefetch={false}
                 className='col-2 m-2 col-lg btn btn-secondary mx-lg-2'>
                 Back
             </Link>

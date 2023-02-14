@@ -40,7 +40,7 @@ export default function Todo(p: { slug: number, title: string, text: string }) {
                     className='btn btn-outline-success '
                 >Done
                 </button> */}
-                <Link href={'/' + p.slug} className='btn btn-outline-info mx-2'>Edit</Link>
+                <Link href={'/' + p.slug} prefetch={false} className='btn btn-outline-info mx-2'>Edit</Link>
                 <button
                     className='btn btn-outline-secondary'
                     onClick={deleteHandler}>{isLoading && <span

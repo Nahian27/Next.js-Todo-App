@@ -1,4 +1,4 @@
-export default function Head({ params }: { params: { slug: string } }) {
+export default function Head() {
     return (
         <>
             <title>Edit Todo</title>

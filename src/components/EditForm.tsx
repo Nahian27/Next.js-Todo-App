@@ -16,7 +16,7 @@ function EditFrom(p: { id: number, title: string, content: string }) {
             .from('Todos')
             .update({ title: title, content: content })
             .eq('id', p.id)
-        router.replace('/')
+        router.push('/')
     }
 
     return (<><div className="container">

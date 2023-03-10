@@ -1,5 +1,9 @@
 import { supabase } from '@/lib/initSupabase'
 import EditFrom from "@/components/EditForm";
+export const revalidate = 0
+export const metadata = {
+    title: 'Edit Todo',
+};
 
 async function Edit({ params }: { params: { id: number } }) {
 

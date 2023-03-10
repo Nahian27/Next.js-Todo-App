@@ -25,18 +25,18 @@ function Form() {
 
     return (
         <div>
-            <form onSubmit={handelSubmit} className=' m-5 row justify-content-center'>
-                <input ref={titleRef} name="title" placeholder='Todo Title ' className='col-2 col-lg form-control m-2' required />
-                <input ref={descRef} name="content" placeholder='Todo Text' className='col-2 col-lg form-control m-2' required />
+            <form className='flex flex-col md:flex-row justify-center items-center md:my-10 gap-5 m-2' onSubmit={handelSubmit}>
+                <input ref={titleRef} name="title" placeholder='Todo Title ' className='input input-bordered input-primary w-80' required />
+                <input ref={descRef} name="content" placeholder='Todo Text' className='input input-bordered input-primary w-80' required />
                 <button
                     type="submit"
-                    className='col-2 col-lg btn btn-primary m-2 mx-lg-5'
+                    className='btn btn-primary w-28'
                 >
                     Add
                 </button>
 
             </form>
-        </div>);
+        </div>)
 }
 
 export default Form;

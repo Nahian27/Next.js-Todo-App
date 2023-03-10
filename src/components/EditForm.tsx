@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { supabase } from '@/lib/initSupabase';
 import Link from 'next/link'
 import { ChangeEvent, useState } from 'react';
@@ -19,20 +19,20 @@ function EditFrom(p: { id: number, title: string, content: string }) {
         router.push('/')
     }
 
-    return (<><div className="container">
-        <h1 className='p-5 text-center'>Edit a Todo</h1>
-        <form onSubmit={updateHandler} className=' m-5 row justify-content-center'>
-            <input name="title" placeholder='Todo Title ' className='col-2 col-lg form-control m-2' value={title} onChange={(e) => setTitle(e.target.value)} required />
-            <input name="content" placeholder='Todo Text' className='col-2 col-lg form-control m-2' value={content} onChange={(e) => setContent(e.target.value)} required />
+    return (<><div>
+        <h1 className='sm:text-5xl text-3xl py-10 text-center'>Edit a Todo</h1>
+        <form onSubmit={updateHandler} className='flex flex-col md:flex-row justify-center items-center md:my-10 gap-5 m-2'>
+            <input name="title" placeholder='Todo Title ' className='input input-bordered input-primary w-80' value={title} onChange={(e) => setTitle(e.target.value)} required />
+            <input name="content" placeholder='Todo Text' className='input input-bordered input-primary w-80' value={content} onChange={(e) => setContent(e.target.value)} required />
             <Link
                 href={'/'}
                 prefetch={false}
-                className='col-2 m-2 col-lg btn btn-secondary mx-lg-2'>
+                className='btn btn-secondary'>
                 Back
             </Link>
             <button
                 type='submit'
-                className='col-2 m-2 col-lg btn btn-primary  mx-lg-2'
+                className='btn btn-primary'
             >
                 Save Changes
             </button>

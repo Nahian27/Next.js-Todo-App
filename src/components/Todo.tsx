@@ -28,28 +28,25 @@ export default function Todo(p: { slug: number, title: string, text: string }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0 }}
             transition={{ duration: 1, layout: { duration: 0.5 } }}
-            className='card shadow-sm p-0 m-2 m-lg-3' style={{ width: '300px', height: '350px' }}>
-            <h2 className='card-header'>
-                {p.title}
-            </h2>
-            <div className='card-body'>
-                {p.text}
-            </div>
-            <div className='card-footer text-end'>
-                {/* <button
+            className='card shadow-lg bg-base-300 w-80 sm:h-96 h-60'>
+            <div className="card-body">
+                <h2 className='card-title'>
+                    {p.title}
+                </h2>
+                <div className='card-body'>
+                    {p.text}
+                </div>
+                <div className='card-actions flex justify-end gap-3'>
+                    {/* <button
                     className='btn btn-outline-success '
                 >Done
                 </button> */}
-                <Link href={'/' + p.slug} className='btn btn-outline-info mx-2'>Edit</Link>
-                <button
-                    className='btn btn-outline-secondary'
-                    onClick={deleteHandler}>{isLoading && <span
-                        className="spinner-border spinner-border-sm"
-                        role="status"
-                        aria-hidden="true"
-                    />}Delete
-                </button>
-
+                    <Link prefetch={false} href={'/' + p.slug} className='btn btn-secondary'>Edit</Link>
+                    <button
+                        className={`btn btn-accent ${isLoading && "loading"}`}
+                        onClick={deleteHandler}>Delete
+                    </button>
+                </div>
             </div>
 
         </motion.div ></AnimatePresence>

@@ -1,32 +1,28 @@
-'use client';
 import { supabase } from '@/lib/initSupabase';
+import { revalidatePath } from 'next/cache';
 import Link from 'next/link'
-import { ChangeEvent, useState } from 'react';
-import { useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation';
 
-function EditFrom(p: { id: number, title: string, content: string }) {
 
-    const [title, setTitle] = useState(p.title)
-    const [content, setContent] = useState(p.content)
-    const router = useRouter()
+async function EditFrom(p: { id: number, title: string, content: string }) {
 
-    async function updateHandler(e: ChangeEvent<HTMLFormElement>) {
-        e.preventDefault()
+    async function updateHandler(formData: FormData) {
+        "use server";
         const { error } = await supabase
             .from('Todos')
-            .update({ title: title, content: content })
+            .update({ title: formData.get("title"), content: formData.get("content") })
             .eq('id', p.id)
-        router.push('/')
+        revalidatePath("/")
+        redirect("/")
+
     }
 
     return (<><div>
-        <h1 className='sm:text-5xl text-3xl py-10 text-center'>Edit a Todo</h1>
-        <form onSubmit={updateHandler} className='flex flex-col md:flex-row justify-center items-center md:my-10 gap-5 m-2'>
-            <input name="title" placeholder='Todo Title ' className='input input-bordered input-primary w-80' value={title} onChange={(e) => setTitle(e.target.value)} required />
-            <input name="content" placeholder='Todo Text' className='input input-bordered input-primary w-80' value={content} onChange={(e) => setContent(e.target.value)} required />
+        <form action={updateHandler} className='flex flex-col md:flex-row justify-center items-center md:my-10 gap-5 m-2'>
+            <input name="title" defaultValue={p.title} placeholder='Todo Title' className='input input-bordered input-primary w-80' required />
+            <input name="content" defaultValue={p.content} placeholder='Todo Text' className='input input-bordered input-primary w-80' required />
             <Link
                 href={'/'}
-                prefetch={false}
                 className='btn btn-secondary'>
                 Back
             </Link>

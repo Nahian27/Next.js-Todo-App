@@ -1,40 +1,31 @@
-'use client';
-import React, { useRef, ChangeEvent, FormEvent } from "react";
-import { useRouter } from 'next/navigation'
 import { supabase } from "@/lib/initSupabase";
-
+import { revalidatePath } from 'next/cache'
 function Form() {
 
-    const titleRef = useRef<HTMLInputElement>(null)
-    const descRef = useRef<HTMLInputElement>(null)
-    const router = useRouter()
-
-    async function handelSubmit(e: ChangeEvent<HTMLFormElement>) {
-        e.preventDefault()
+    async function handelSubmit(formData: FormData) {
+        "use server";
         const todo = {
-            title: titleRef.current!.value,
-            content: descRef.current!.value
+            title: formData.get("title"),
+            content: formData.get("content")
         }
 
         const { error } = await supabase
             .from('Todos')
             .insert(todo)
-
-        router.refresh()
+        revalidatePath("/")
     }
 
     return (
         <div>
-            <form className='flex flex-col md:flex-row justify-center items-center md:my-10 gap-5 m-2' onSubmit={handelSubmit}>
-                <input ref={titleRef} name="title" placeholder='Todo Title ' className='input input-bordered input-primary w-80' required />
-                <input ref={descRef} name="content" placeholder='Todo Text' className='input input-bordered input-primary w-80' required />
+            <form action={handelSubmit} className='flex flex-col md:flex-row justify-center items-center md:my-10 gap-5 m-2'>
+                <input name="title" placeholder='Todo Title ' className='input input-bordered input-primary w-80' required />
+                <input name="content" placeholder='Todo Text' className='input input-bordered input-primary w-80' required />
                 <button
                     type="submit"
                     className='btn btn-primary w-28'
                 >
                     Add
                 </button>
-
             </form>
         </div>)
 }

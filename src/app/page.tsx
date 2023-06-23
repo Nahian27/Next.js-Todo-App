@@ -1,7 +1,6 @@
 import { supabase } from '../lib/initSupabase'
 import Form from "../components/Form";
 import Todo from "../components/Todo";
-export const revalidate = 0
 export const metadata = {
   title: 'Todo App',
 };
